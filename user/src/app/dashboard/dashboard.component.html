@@ -1,0 +1,49 @@
+<style> 
+  input[type=text] {
+    width: 71.5%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 10px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+  }
+</style>
+  <div class="container-fluid col-md-9 md-1">
+      <h3><u><b>All Users</b></u></h3>
+        <input type="text" name="search" [(ngModel)]="userFilter.username || userFilter.email " placeholder="Search.."  autocomplete="off"><br><br>
+        <table  id="myTable" class="mdl-data-table mdl-js-data-table  mdl-shadow--2dp" >
+        <thead>
+          <tr>
+            <th class="mdl-data-table__cell--non-numeric">Sr.no</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>CreatedAt</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of datas | filterBy: userFilter | paginate: config ; let i=index" >
+            <td class="mdl-data-table__cell--non-numeric">{{ (config.currentPage - 1) * config.itemsPerPage + i + 1 }}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.role}}</td>
+            <td>{{user.createdAt | date:"dd MMM yyyy"}}</td>
+            <td *ngIf="user.flag == true">
+              <button class="mdl-button" [routerLink]="['/update', user._id]" style="background-color:rgb(51, 185, 230); color: white"> 
+                <label >Edit</label>
+              </button>&nbsp;
+              <button class="mdl-button" style="background-color:rgb(236, 65, 65); color: white" (click)="delete(user._id)">
+                <label>Delete</label>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table><br>
+      <pagination-controls (pageChange)="pageChange($event)" class="my-pagination" align="center"></pagination-controls>
+  </div>    

@@ -1,0 +1,55 @@
+<div class="container-fluid col-md-4 md-1">
+  <h2><u><b>Update Form</b></u></h2>
+  <form [formGroup]="editForm" >
+    <div class="form-group">
+        <div class="mdl-textfield mdl-js-textfield">
+          <input class="mdl-textfield__input" [class.in-valid]="username.invalid && username.touched" type="text" formControlName="username">
+          <label class="mdl-textfield__label">Username</label>
+          <small [class.d-none]="username.valid || username.untouched" class="text-danger">Username is required</small>
+        </div>
+
+        <div class="mdl-textfield mdl-js-textfield">
+          <select formControlName="role" class="custom-select">
+            <option value="default">Select Role</option>
+            <option *ngFor="let role of roles">{{role}}</option>
+          </select>
+        </div>
+
+        <div class="mdl-textfield mdl-js-textfield">
+          <input class="mdl-textfield__input" [class.in-valid]="email.invalid && email.touched" type="text" formControlName="email">
+          <label class="mdl-textfield__label">Email Id</label>
+          <small [class.d-none]="email.valid || email.untouched" class="text-danger">Email-Id is required</small>
+        </div>
+
+        <div class="mdl-textfield mdl-js-textfield">
+          <input class="mdl-textfield__input"[class.in-valid]="password.invalid && password.touched" type="password" formControlName="password">
+          <label class="mdl-textfield__label">Password</label>
+          <small [class.d-none]="password.valid || password.untouched" class="text-danger">Password is required</small>
+        </div>
+
+        <div formGroupName="permissions">
+          <div class="form-group">
+            <label>Permissions</label>
+            <div class="form-check mb-3">
+              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+                <input type="checkbox" class="mdl-checkbox__input" formControlName="view">View
+              </label>
+            </div>
+            <div class="form-check mb-3">
+              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+                <input type="checkbox" class="mdl-checkbox__input" formControlName="update">Update                  
+              </label>
+            </div>
+            <div class="form-check mb-3">
+              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+                <input type="checkbox" class="mdl-checkbox__input" formControlName="delete">Delete
+              </label>
+            </div>
+          </div>
+        </div>
+        
+        <button (click)="updateData(username.value,email.value,password.value)" [disabled]="!editForm.valid" class="btn btn-success" type="submit">Save Changes</button>&nbsp;
+        <button (click)="updateDataBack()" class="btn btn-danger" type="button" routerLink="/dashboard">Back</button>  
+    </div>
+  </form>
+</div>

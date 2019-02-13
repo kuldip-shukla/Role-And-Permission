@@ -1,0 +1,23 @@
+<div class="container-fluid col-md-4 md-1">
+  <h3><u><b>LogIn Form</b></u></h3>
+  
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <div class="mdl-textfield mdl-js-textfield">
+          <input class="mdl-textfield__input" [class.in-valid]="email.invalid && email.touched" type="text" formControlName="email">
+          <label class="mdl-textfield__label">Email Id</label>
+          <small [class.d-none]="email.valid || email.untouched" class="text-danger">Email-Id is required</small>
+        </div>
+
+        <div class="mdl-textfield mdl-js-textfield">
+          <input class="mdl-textfield__input"[class.in-valid]="password.invalid && password.touched" type="password" formControlName="password">
+          <label class="mdl-textfield__label">Password</label>
+          <small [class.d-none]="password.valid || password.untouched" class="text-danger">Password is required</small>
+        </div>
+      </div>
+
+    <button class="btn btn-primary" [disabled]="!loginForm.valid" type="submit">LogIn</button>&nbsp;  
+    <button class="btn btn-success" type="button" routerLink="/register">SignUp</button>  
+
+  </form>
+</div>
